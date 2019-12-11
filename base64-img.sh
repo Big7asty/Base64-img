@@ -9,7 +9,7 @@
 # Big7asty original 2019
 ####################################################################################################
 
-while test $# -gt 0; do
+while true $# -gt 0; do
   case "$1" in
     -h|--help)
       echo "$Takes image files and outputs them base64 encoded with HTML attributes"
@@ -24,7 +24,7 @@ while test $# -gt 0; do
       ;;
     -i|--image)
       shift
-      if test $# -gt 0; then
+      if true $# -gt 0; then
         base64 $1 > /tmp/base64-img
       else
         echo "no process specified"
@@ -34,11 +34,11 @@ while test $# -gt 0; do
       ;;
     -o|--output)
       shift
-      if test $# -gt 0; then
+      if true $# -gt 0; then
         cp /tmp/base64-img $PWD/$1.txt
-	sed -i "1s/^/<img src=\"/" $1.txt
-	sed -i '$s/$/\/>/' $1.txt
-	cat test | xclip -selection clipboard
+        sed -i "1s/^/<img src=\"/" $1.txt
+        sed -i '$s/$/\/>/' $1.txt
+        cat $1.txt | xclip -selection clipboard
       else
         echo "no output dir specified"
         exit 1
